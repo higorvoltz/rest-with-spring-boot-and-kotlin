@@ -1,5 +1,6 @@
 package br.com.higoramorim
 
+import br.com.higoramorim.exceptions.UnsupportedMathOperationException
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -15,7 +16,8 @@ class MathController {
         @PathVariable(value = "value1") value1: String?,
         @PathVariable(value = "value2") value2: String?,
     ): Double {
-        if (!isNumeric(value1) || !isNumeric(value2)) throw Exception()
+        if (!isNumeric(value1) || !isNumeric(value2))
+            throw UnsupportedMathOperationException("insira valor numérico")
         return convert2Double(value1) + convert2Double(value2)
     }
 
